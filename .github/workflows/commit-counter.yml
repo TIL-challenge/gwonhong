@@ -17,6 +17,9 @@ jobs:
       - name: Get Commit Days (Excluding github-actions)
         id: commit_days
         run: |
+          # Set timezone to Korea Standard Time (KST)
+          export TZ="Asia/Seoul"
+
           # Get total commit days excluding commits made by "github-actions"
           total_days=$(git log --pretty="%cd %cn" --date=short | grep -v "github-actions" | cut -d ' ' -f1 | sort | uniq | wc -l)
           echo "Total commit days: $total_days"
