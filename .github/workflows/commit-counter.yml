@@ -34,8 +34,8 @@ jobs:
           weekly_days=${{ steps.weekly_commit_days.outputs.weekly_days }}
 
           # Construct the shields.io badge URLs
-          total_commit_badge="[![Total Commit Days](https://img.shields.io/badge/Total%20Commit%20Days-$total_days-brightgreen)]"
-          weekly_commit_badge="[![Weekly Commit Days](https://img.shields.io/badge/Weekly%20Commit%20Days-$weekly_days-blue)]"
+          total_commit_badge="![Total Commit Days](https://img.shields.io/badge/Total%20Commit%20Days-$total_days-brightgreen)"
+          weekly_commit_badge="![Weekly Commit Days](https://img.shields.io/badge/Weekly%20Commit%20Days-$weekly_days-blue)"
 
           # Replace the existing badges in README.md
           sed -i 's|\[!\[Total Commit Days.*\]|'"$total_commit_badge"'|g' README.md
