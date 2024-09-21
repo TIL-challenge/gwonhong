@@ -11,6 +11,8 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # 1 by default - 이것 때메 하루치 commit만 확인하던거였음!
 
       - name: Get Commit Days (Excluding github-actions)
         id: commit_days
@@ -18,7 +20,7 @@ jobs:
           # Get total commit days excluding commits made by "github-actions"
           total_days=$(git log --pretty="%cd %cn" --date=short | grep -v "github-actions" | cut -d ' ' -f1 | sort | uniq | wc -l)
           echo "Total commit days: $total_days"
-          echo "{total_days}={$total_days}" >> $GITHUB_STATE
+          echo "total_days=$total_days" >> "$GITHUB_ENV"
 
           # Get the start of the current week (Sunday)
           sunday=$(date -d "last sunday" +"%Y-%m-%d")
@@ -26,21 +28,18 @@ jobs:
           # Get weekly commit days excluding commits made by "github-actions"
           weekly_days=$(git log --since="$sunday" --pretty="%cd %cn" --date=short | grep -v "github-actions" | cut -d ' ' -f1 | sort | uniq | wc -l)
           echo "Weekly commit days: $weekly_days"
-          echo "{weekly_days}={$weekly_days}" >> $GITHUB_STATE
+          echo "weekly_days=$weekly_days" >> "$GITHUB_ENV"
           
 
       - name: Update README with Shields.io badges
         run: |
-          total_days=${{ steps.commit_days.outputs.total_days }}
-          weekly_days=${{ steps.commit_days.outputs.weekly_days }}
+          # Construct the shields.io badge URLs
+          total_commit_badge="![Total Commit Days](https://img.shields.io/badge/Total%20Commit%20Days-$total_days-brightgreen)"
+          weekly_commit_badge="![Weekly Commit Days](https://img.shields.io/badge/Weekly%20Commit%20Days-$weekly_days-blue)"
 
           # Replace the existing badges in README.md
           sed -i 's|!\[Total Commit Days\](https://img.shields.io/badge/Total%20Commit%20Days-[0-9]*-brightgreen)|'"$total_commit_badge"'|g' README.md
           sed -i 's|!\[Weekly Commit Days\](https://img.shields.io/badge/Weekly%20Commit%20Days-[0-9]*-blue)|'"$weekly_commit_badge"'|g' README.md
-
-          # Replace the existing badges in README.md
-          sed -i 's|!\[Total Commit Days\](.*)|'"$total_commit_badge"'|g' README.md
-          sed -i 's|!\[Weekly Commit Days\](.*)|'"$weekly_commit_badge"'|g' README.md
 
           # Push the changes back to the repository
           git config --global user.name "github-actions"
