@@ -2,9 +2,7 @@
 
 ## 나를 자극하기 위한 뱃지
 
-Total Commit Days: [![Total Commit Days](https://img.shields.io/badge/Total%20Commit%20Days-0-brightgreen)]
-
-Weekly Commit Days: [![Weekly Commit Days](https://img.shields.io/badge/Weekly%20Commit%20Days-0-blue)]
+![Total Commit Days](https://img.shields.io/badge/Total%20Commit%20Days-0-brightgreen) ![Weekly Commit Days](https://img.shields.io/badge/Weekly%20Commit%20Days-0-blue)
 
 ## 소개
 
