@@ -38,8 +38,8 @@ jobs:
           weekly_commit_badge="![Weekly Commit Days](https://img.shields.io/badge/Weekly%20Commit%20Days-$weekly_days-blue)"
 
           # Replace the existing badges in README.md
-          sed -i 's|\[!\[Total Commit Days.*\]|'"$total_commit_badge"'|g' README.md
-          sed -i 's|\[!\[Weekly Commit Days.*\]|'"$weekly_commit_badge"'|g' README.md
+          sed -i 's|!\[Total Commit Days\](.*)|'"$total_commit_badge"'|g' README.md
+          sed -i 's|!\[Weekly Commit Days\](.*)|'"$weekly_commit_badge"'|g' README.md
 
           # Push the changes back to the repository
           git config --global user.name "github-actions"
