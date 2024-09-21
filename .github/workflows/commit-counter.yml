@@ -2,7 +2,7 @@ name: Update Commit Counters
 
 on:
   schedule:
-    - cron: '0 0 * * *' # Runs every day 00:00
+    - cron: "0 15 * * *" # Runs at 3:00 PM UTC, which is 12:00 AM KST
   workflow_dispatch:
 
 jobs:
@@ -35,7 +35,6 @@ jobs:
           echo "Last Sunday: $sunday"
           echo "Total commit days: $total_days"
           echo "Weekly commit days: $weekly_days"
-          
 
       - name: Update README with Shields.io badges
         run: |
