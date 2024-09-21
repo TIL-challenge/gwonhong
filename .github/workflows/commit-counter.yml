@@ -10,14 +10,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Get Total Commit Days (Excluding github-actions)
         id: total_commit_days
         run: |
           total_days=$(git log --format="%ad %an" --date=short | grep -v "github-actions" | cut -d ' ' -f1 | uniq | wc -l)
           echo "Total commit days: $total_days"
-          echo "::set-output name=total_days::$total_days"
+          echo "{total_days}={$total_days}" >> $GITHUB_STATE
 
       - name: Get Weekly Commit Days (Excluding github-actions)
         id: weekly_commit_days
@@ -26,7 +26,7 @@ jobs:
           sunday=$(date -d "last sunday" +"%Y-%m-%d")
           weekly_days=$(git log --since="$sunday" --format="%ad %an" --date=short | grep -v "github-actions" | cut -d ' ' -f1 | uniq | wc -l)
           echo "Weekly commit days: $weekly_days"
-          echo "::set-output name=weekly_days::$weekly_days"
+          echo "{weekly_days}={$weekly_days}" >> $GITHUB_STATE
 
       - name: Update README with Shields.io badges
         run: |
