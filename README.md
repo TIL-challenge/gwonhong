@@ -1,6 +1,6 @@
 # gwonhong's TIL
 
-![Total Commit Days](https://img.shields.io/badge/Total%20Commit%20Days-8-brightgreen) ![Weekly Commit Days](https://img.shields.io/badge/Weekly%20Commit%20Days-1-blue)
+![Total Commit Days](https://img.shields.io/badge/Total%20Commit%20Days-9-brightgreen) ![Weekly Commit Days](https://img.shields.io/badge/Weekly%20Commit%20Days-2-blue)
 
 ## 소개
 
